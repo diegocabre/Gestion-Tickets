@@ -1,0 +1,11 @@
+<!-- tickets.hbs -->
+<h2>Tickets</h2>
+<a href="/tickets/new" class="btn btn-primary mb-3">Crear Nuevo Ticket</a>
+<ul class="list-group">
+  {{#each tickets}}
+    <li class="list-group-item">
+      <a href="/tickets/{{this.id}}">{{this.descripcion}}</a>
+      <small class="text-muted">Creado el {{this.fecha_creacion}}</small>
+    </li>
+  {{/each}}
+</ul>
