@@ -1,18 +1,17 @@
-<!-- ticket_details.hbs -->
-<h2>Detalles del Ticket</h2>
+{{!-- ticket_details.hbs --}}
+{{> main title="Detalles del Ticket"}}
+<h1>Detalles del Ticket</h1>
+<h2>{{ticket.titulo}}</h2>
 <p>{{ticket.descripcion}}</p>
-<small class="text-muted">Creado el {{ticket.fecha_creacion}}</small>
+
 <h3>Comentarios</h3>
-<ul class="list-group">
+<ul>
   {{#each comments}}
-    <li class="list-group-item">
-      <p>{{this.mensaje}}</p>
-      <small class="text-muted">Por
-        {{this.id_usuario}}
-        el
-        {{this.fecha_creacion}}</small>
-    </li>
+    <li>{{this.mensaje}}</li>
   {{/each}}
 </ul>
-<a href="/tickets/{{ticket.id}}/comment" class="btn btn-primary mt-3">Añadir
-  Comentario</a>
+
+<form action="/tickets/{{ticket.id}}/comment" method="post">
+  <textarea name="mensaje" placeholder="Añadir comentario"></textarea>
+  <button type="submit">Enviar</button>
+</form>

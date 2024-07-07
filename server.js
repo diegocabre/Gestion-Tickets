@@ -35,16 +35,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../client")));
 
 // Rutas
 const indexRoutes = require("./routes/index");
-const authRoutes = require("./routes/auth");
+const { router: authRoutes } = require("./routes/auth");
 const ticketRoutes = require("./routes/tickets");
 
 app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
 app.use("/tickets", ticketRoutes);
+
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;
