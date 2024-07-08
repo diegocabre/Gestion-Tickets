@@ -113,7 +113,7 @@ p {
 }
 
 /* Estilos para la página de login */
-form {
+#login-form {
   max-width: 500px; /* Ajusta el ancho máximo del formulario */
   margin: 0 auto; /* Centra el formulario horizontalmente */
   padding: 20px; /* Agrega un padding interno */
@@ -146,7 +146,7 @@ h2 {
   border-radius: 0.25rem; /* Redondea las esquinas de los campos de entrada */
 }
 
-.btn-primary {
+#login-btn {
   display: block; /* Hace que el botón sea un bloque para ocupar el ancho completo */
   width: 100%; /* Asegura que el botón ocupe el ancho completo del formulario */
   padding: 0.5rem; /* Agrega padding interno al botón */

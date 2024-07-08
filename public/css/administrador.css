@@ -1,89 +1,88 @@
-/* Styles for Administrador Page */
+/* General Styles */
+html,
+body {
+  height: 100%; /* Asegura que html y body ocupen el 100% de la altura de la ventana */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Establece la dirección del contenido en columna */
+}
+
+/* Main content area */
 .container {
+  flex: 1; /* Permite que el contenedor principal ocupe el espacio disponible */
   padding: 20px;
 }
 
 /* Table Styles */
-.table {
-  width: 100%;
-  border-collapse: collapse;
+#tickets-container {
+  margin-top: 20px;
 }
 
-.table th,
-.table td {
-  padding: 0.75rem;
-  text-align: left;
+#tickets-table {
+  margin-top: 20px;
 }
 
-.table thead {
+/* Table Header */
+#tickets-table thead {
   background-color: #f8f9fa;
 }
 
-.table th {
+#tickets-table th {
   font-weight: bold;
 }
 
-.table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+/* Table Body */
+#tickets-table tbody tr {
+  transition: background-color 0.3s;
 }
 
-.table tbody tr:hover {
-  background-color: #e9ecef;
+#tickets-table tbody tr:hover {
+  background-color: #f1f1f1;
 }
 
-.table a {
-  color: #007bff;
-  text-decoration: none;
+#tickets-table td {
+  vertical-align: middle; /* Alinea verticalmente el contenido de las celdas */
 }
 
-.table a:hover {
-  text-decoration: underline;
+/* Form Styles */
+#auditado-form {
+  display: inline; /* Asegura que el formulario se muestre en línea */
+}
+
+#delete-ticket-form {
+  display: inline; /* Asegura que el formulario de eliminación se muestre en línea */
 }
 
 /* Button Styles */
-.btn-sm {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-  border-radius: 0.2rem;
+.btn-info {
+  margin-right: 5px;
 }
 
-/* Responsive Table Styles */
-@media (max-width: 768px) {
-  .table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .table th,
-  .table td {
-    display: block;
-    text-align: right;
-  }
-
-  .table th {
-    text-align: left;
-  }
-
-  .table td {
-    position: relative;
-    padding-left: 50%;
-  }
-
-  .table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 0;
-    width: 45%;
-    padding-left: 10px;
-    font-weight: bold;
-    white-space: nowrap;
-  }
+.btn-success {
+  margin-right: 5px;
 }
 
-@media (max-width: 576px) {
-  .btn-sm {
-    padding: 0.2rem 0.4rem;
-    font-size: 0.75rem;
-  }
+.btn-danger {
+  margin-right: 5px;
+}
+
+/* Button Hover Effects */
+.btn-info:hover {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-success:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-danger:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
