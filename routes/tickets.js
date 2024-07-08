@@ -6,6 +6,16 @@ const { checkRole, isAuthenticated } = require("./auth");
 // Middleware de autenticación
 router.use(isAuthenticated);
 
+// Ruta para la página principal de administrador
+router.get("/inicio/admin", checkRole("administrador"), (req, res) => {
+  res.render("administrador", { user: req.user });
+});
+
+// Ruta para la página principal de estudiante
+router.get("/inicio/estudiante", checkRole("estudiante"), (req, res) => {
+  res.render("estudiante", { user: req.user });
+});
+
 // Mostrar el formulario de creación de ticket
 router.get("/new", checkRole("estudiante"), async (req, res) => {
   try {
@@ -59,14 +69,36 @@ router.get("/estudiante", checkRole("estudiante"), async (req, res) => {
 
 // Listar tickets para administradores
 router.get("/administrador", checkRole("administrador"), async (req, res) => {
+  const { tipo, fecha } = req.query;
+  let query = `SELECT tickets.id, tickets.descripcion, tickets.fecha_creacion, tickets.auditado, 
+                      usuarios.nombre AS estudiante_nombre, tipos.nombre AS tipo_nombre
+               FROM tickets 
+               JOIN usuarios ON tickets.id_usuario = usuarios.id
+               JOIN tipos ON tickets.id_tipo = tipos.id`;
+  const params = [];
+
+  if (tipo) {
+    query += ` WHERE tickets.id_tipo = $${params.length + 1}`;
+    params.push(tipo);
+  }
+
+  if (fecha) {
+    if (params.length > 0) {
+      query += ` AND DATE(tickets.fecha_creacion) = $${params.length + 1}`;
+    } else {
+      query += ` WHERE DATE(tickets.fecha_creacion) = $${params.length + 1}`;
+    }
+    params.push(fecha);
+  }
+
   try {
-    const result = await pool.query(
-      `SELECT tickets.id, tickets.descripcion, tickets.fecha_creacion, tickets.auditado, 
-              usuarios.nombre AS estudiante_nombre 
-       FROM tickets 
-       JOIN usuarios ON tickets.id_usuario = usuarios.id`
-    );
-    res.render("administrador", { tickets: result.rows, user: req.user });
+    const result = await pool.query(query, params);
+    const tiposResult = await pool.query("SELECT * FROM tipos"); // Obtener tipos de tickets
+    res.render("administrador", {
+      tickets: result.rows,
+      tipos: tiposResult.rows,
+      user: req.user,
+    });
   } catch (error) {
     console.error("Error al listar tickets para administrador:", error);
     res.status(500).send("Error al listar tickets para administrador.");
@@ -198,7 +230,10 @@ router.get("/:id/comments", isAuthenticated, async (req, res) => {
 
   try {
     const result = await pool.query(
-      "SELECT * FROM comentarios WHERE id_ticket = $1",
+      `SELECT comentarios.*, usuarios.nombre AS usuario_nombre, usuarios.tipo_usuario AS usuario_tipo
+       FROM comentarios
+       JOIN usuarios ON comentarios.id_usuario = usuarios.id
+       WHERE id_ticket = $1`,
       [ticketId]
     );
     const comentarios = result.rows;
@@ -211,7 +246,6 @@ router.get("/:id/comments", isAuthenticated, async (req, res) => {
   }
 });
 
-// Ruta para agregar un comentario a un ticket
 router.post("/:id/comment", checkRole("administrador"), async (req, res) => {
   const ticketId = parseInt(req.params.id, 10);
   const { mensaje } = req.body;

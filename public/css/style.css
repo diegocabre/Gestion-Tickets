@@ -41,6 +41,24 @@ body {
   margin-right: 1rem;
 }
 
+/* Navbar Toggler (Menu Hamburguesa) */
+.navbar-toggler {
+  border: none; /* Asegura que no haya borde en el botón del menú hamburguesa */
+}
+
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,...'); /* Asegúrate de que el icono del menú hamburguesa esté visible */
+}
+
+/* Collapsible Menu Styles */
+.collapse {
+  display: none; /* Asegúrate de que la propiedad display esté manejada por Bootstrap */
+}
+
+.collapse.show {
+  display: block; /* El menú colapsado debe mostrarse cuando se active */
+}
+
 /* Footer Styles */
 .footer {
   background-color: #f1f1f1;

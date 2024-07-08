@@ -16,12 +16,12 @@
         {{#each comentarios}}
           <li class="list-group-item">
             <p>{{this.mensaje}}</p>
-            <small>Por: {{this.id_usuario}}</small>
+            <small>Por: {{this.usuario_nombre}} ({{this.usuario_tipo}})</small>
           </li>
         {{/each}}
       </ul>
 
-      <form action="/tickets/{{ticketId}}/comment" method="POST">
+      {{!--       <form action="/tickets/{{ticketId}}/comment" method="POST">
         <div class="form-group">
           <label for="mensaje">Nuevo Comentario</label>
           <textarea
@@ -33,7 +33,7 @@
           ></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Agregar Comentario</button>
-      </form>
+      </form> --}}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

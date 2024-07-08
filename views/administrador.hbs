@@ -1,68 +1,59 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/administrador.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Administración de Tickets</title>
-</head>
-<body>
-    <div id="tickets-container" class="container">
-        <h2>Administración de Tickets</h2>
-        <table id="tickets-table" class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Estudiante</th>
-                    <th>Descripción</th>
-                    <th>Fecha de Creación</th>
-                    <th>Auditado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each tickets}}
-                <tr>
-                    <td>{{this.id}}</td>
-                    <td>{{this.estudiante_nombre}}</td> <!-- Cambiado aquí -->
-                    <td><a href="/tickets/{{this.id}}">{{this.descripcion}}</a></td>
-                    <td>{{this.fecha_creacion}}</td>
-                    <td>
-                        <form id="auditado-form" action="/tickets/{{this.id}}/auditado" method="POST">
-                            <input 
-                                type="checkbox" 
-                                name="auditado" 
-                                value="true" 
-                                {{#if this.auditado}}checked{{/if}} 
-                                onChange="this.form.submit()"
-                            >
-                            <input type="hidden" name="auditado" value="false">
-                        </form>
-                    </td>
-                    <td>
-                        <a href="/tickets/{{this.id}}/comments" class="btn btn-info btn-sm" id="ver-comentarios">Ver Comentarios</a>
-                        <a href="/tickets/{{this.id}}/comments/new" class="btn btn-success btn-sm" id="crear-comentario">Crear Comentario</a>
-                        <form id="delete-ticket-form"
-                          action="/tickets/{{this.id}}/delete" 
-                          method="POST" 
-                          style="display: inline;" 
-                          class="delete-ticket" 
-                          data-id="{{this.id}}"
-                        >
-                          <button type="submit" class="btn btn-danger btn-sm" id="borrar-ticket">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
+<div id="tickets-container" class="container">
+    <h2>Administración de Tickets</h2>
+    <form id="search-form" action="/tickets/administrador" method="GET" class="form-inline mb-3">
+        <div class="form-group mr-2">
+            <label for="tipo" class="mr-2">Tipo:</label>
+            <select name="tipo" id="tipo" class="form-control">
+                <option value="">Todos</option>
+                <!-- Aquí debes cargar los tipos de ticket dinámicamente -->
+                {{#each tipos}}
+                <option value="{{this.id}}">{{this.nombre}}</option>
                 {{/each}}
-            </tbody>
-        </table>
-    </div>
+            </select>
+        </div>
+        <div class="form-group mr-2">
+            <label for="fecha" class="mr-2">Fecha:</label>
+            <input type="date" name="fecha" id="fecha" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+    <table id="tickets-table" class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Estudiante</th>
+                <th>Descripción</th>
+                <th>Tipo</th>
+                <th>Fecha de Creación</th>
+                <th>Auditado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each tickets}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.estudiante_nombre}}</td>
+                <td><a href="/tickets/{{this.id}}">{{this.descripcion}}</a></td>
+                <td>{{this.tipo_nombre}}</td>
+                <td>{{this.fecha_creacion}}</td>
+                <td>
+                    <form id="auditado-form" action="/tickets/{{this.id}}/auditado" method="POST">
+                        <input type="checkbox" name="auditado" value="true" {{#if this.auditado}}checked{{/if}} onChange="this.form.submit()">
+                        <input type="hidden" name="auditado" value="false">
+                    </form>
+                </td>
+                <td>
+                    <a href="/tickets/{{this.id}}/comments" class="btn btn-info btn-sm" id="ver-comentarios">Ver Comentarios</a>
+                    <a href="/tickets/{{this.id}}/comments/new" class="btn btn-success btn-sm" id="crear-comentario">Crear Comentario</a>
+                    <form id="delete-ticket-form" action="/tickets/{{this.id}}/delete" method="POST" style="display: inline;" class="delete-ticket" data-id="{{this.id}}">
+                        <button type="submit" class="btn btn-danger btn-sm" id="borrar-ticket">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="/js/scripts.js"></script>
-</body>
-</html>
 

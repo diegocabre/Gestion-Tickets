@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const path = require("path");
+const addUserToLocals = require("./middlewares/addUserToLocals");
 require("dotenv").config();
 
 // Configuración de la conexión a la base de datos
@@ -55,13 +56,21 @@ app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "../client")));
+
+// Middleware para agregar usuario a res.locals
+app.use(addUserToLocals);
 
 // Rutas
 const indexRoutes = require("./routes/index");
