@@ -1,0 +1,89 @@
+/* Styles for Administrador Page */
+.container {
+  padding: 20px;
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.table thead {
+  background-color: #f8f9fa;
+}
+
+.table th {
+  font-weight: bold;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+.table a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+/* Button Styles */
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+}
+
+/* Responsive Table Styles */
+@media (max-width: 768px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .table th,
+  .table td {
+    display: block;
+    text-align: right;
+  }
+
+  .table th {
+    text-align: left;
+  }
+
+  .table td {
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-sm {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+  }
+}

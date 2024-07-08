@@ -1,0 +1,215 @@
+/* General Styles */
+html,
+body {
+  height: 100%; /* Asegura que el html y body ocupen el 100% de la altura de la ventana */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Establece la dirección del contenido en columna */
+}
+
+/* Main content area */
+.container {
+  flex: 1; /* Permite que el contenedor principal ocupe el espacio disponible */
+  padding: 20px;
+}
+
+/* Header Styles */
+.header-logo {
+  width: 50px; /* Ajusta el tamaño del logo en el header */
+  height: auto;
+}
+
+.navbar {
+  padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-item .nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.navbar-text {
+  margin-right: 1rem;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #f1f1f1;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+}
+
+.footer-logo-img {
+  width: 100px; /* Ajusta el tamaño del logo en el footer */
+  height: auto;
+}
+
+.footer-info {
+  margin-bottom: 1rem;
+}
+
+.footer-info p {
+  margin: 0;
+}
+
+.footer-socials {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start; /* Alinea los íconos a la izquierda en pantallas grandes */
+}
+
+.footer-socials .social-icon {
+  margin-right: 15px;
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-socials .social-icon i {
+  font-size: 1.5rem;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-nav a {
+  color: #007bff;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para la página de inicio */
+.home-image {
+  width: 100%; /* Ajusta el tamaño según sea necesario */
+  max-width: 600px; /* Ajusta el tamaño máximo según sea necesario */
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Asegura que la imagen esté en un bloque */
+  margin: 20px auto; /* Centra la imagen y agrega margen */
+}
+
+/* Otros estilos específicos para la página de inicio */
+h1 {
+  text-align: center;
+  color: #333; /* Ajusta el color del texto según sea necesario */
+}
+
+p {
+  text-align: center;
+  font-size: 1.2rem; /* Ajusta el tamaño de fuente según sea necesario */
+}
+
+/* Estilos para la página de login */
+form {
+  max-width: 500px; /* Ajusta el ancho máximo del formulario */
+  margin: 0 auto; /* Centra el formulario horizontalmente */
+  padding: 20px; /* Agrega un padding interno */
+  border: 1px solid #ddd; /* Agrega un borde sutil */
+  border-radius: 8px; /* Redondea las esquinas del borde */
+  background-color: #f9f9f9; /* Color de fondo del formulario */
+}
+
+h2 {
+  text-align: center; /* Centra el texto del título */
+  margin-bottom: 20px; /* Agrega margen inferior al título */
+  color: #333; /* Color del texto del título */
+}
+
+/* Styles for Form Group */
+.form-group {
+  margin-bottom: 1rem; /* Agrega margen inferior entre los grupos de formulario */
+}
+
+.form-group label {
+  display: block; /* Asegura que la etiqueta esté en una línea separada */
+  margin-bottom: 0.5rem; /* Agrega margen inferior a la etiqueta */
+  font-weight: bold; /* Hace el texto de la etiqueta en negrita */
+}
+
+.form-group input {
+  width: 100%; /* Asegura que los campos de entrada ocupen el ancho completo del contenedor */
+  padding: 0.5rem; /* Agrega padding interno a los campos de entrada */
+  border: 1px solid #ccc; /* Establece un borde sutil alrededor de los campos de entrada */
+  border-radius: 0.25rem; /* Redondea las esquinas de los campos de entrada */
+}
+
+.btn-primary {
+  display: block; /* Hace que el botón sea un bloque para ocupar el ancho completo */
+  width: 100%; /* Asegura que el botón ocupe el ancho completo del formulario */
+  padding: 0.5rem; /* Agrega padding interno al botón */
+  border-radius: 0.25rem; /* Redondea las esquinas del botón */
+  font-size: 1.125rem; /* Ajusta el tamaño de la fuente del botón */
+  font-weight: bold; /* Hace el texto del botón en negrita */
+}
+
+/* Estilos para la página de registro */
+.register-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para la página de tickets */
+.tickets-list {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .navbar-brand {
+    flex-direction: column; /* Apila el logo y el texto en el header en pantallas pequeñas */
+    align-items: center;
+  }
+
+  .footer-left,
+  .footer-right {
+    text-align: center;
+    margin-bottom: 20px; /* Agrega margen para separar los elementos en pantallas pequeñas */
+  }
+
+  .footer-socials {
+    justify-content: center; /* Centra los íconos de redes sociales en pantallas pequeñas */
+  }
+
+  .footer-nav {
+    text-align: center; /* Centra los enlaces de navegación del footer */
+  }
+
+  .footer-nav a {
+    display: block; /* Asegura que los enlaces se apilen verticalmente */
+    margin: 0.5rem 0; /* Agrega margen vertical entre los enlaces */
+  }
+
+  .home-image {
+    max-width: 100%; /* Ajusta la imagen al ancho completo en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-nav .nav-item .nav-link {
+    padding: 0.5rem; /* Reduce el padding para elementos del menú en pantallas más pequeñas */
+  }
+
+  .footer-info {
+    font-size: 0.9rem; /* Ajusta el tamaño del texto en el footer en pantallas muy pequeñas */
+  }
+}

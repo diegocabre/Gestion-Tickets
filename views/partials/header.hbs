@@ -1,6 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Inicio</a>
-  <div class="collapse navbar-collapse">
+  <a class="navbar-brand" href="/">
+    <img src="/imgs/logo.png" alt="Logo" class="header-logo" />
+    Inicio
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       {{#if user}}
         <li class="nav-item dropdown">
@@ -18,31 +32,33 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             {{#ifCond user.tipo_usuario "===" "administrador"}}
               <a class="dropdown-item" href="/tickets/administrador">Ver Tickets</a>
-              <a class="dropdown-item" href="/tickets/comment">Ver Comentarios</a>
-              <a class="dropdown-item" href="/tickets/comment/new">Nuevo
-                Comentario</a>
+              <a class="dropdown-item" href="/tickets/comments">Ver Comentarios</a>
+              <a class="dropdown-item" href="/tickets/comments/new">Nuevo Comentario</a>
             {{/ifCond}}
             {{#ifCond user.tipo_usuario "===" "estudiante"}}
               <a class="dropdown-item" href="/tickets/new">Crear Ticket</a>
-              <a class="dropdown-item" href="/tickets/comment">Ver Comentarios</a>
+              <a class="dropdown-item" href="/tickets/comments">Ver Comentarios</a>
             {{/ifCond}}
           </div>
         </li>
       {{/if}}
     </ul>
-  </div>
-  <div class="form-inline my-2 my-lg-0">
-    {{#if user}}
-      <span class="navbar-text">Hola, {{user.nombre}}</span>
-      <a class="btn btn-outline-danger my-2 my-sm-0" href="/auth/logout">Cerrar
-        sesión</a>
-    {{else}}
-      <a class="btn btn-outline-success my-2 my-sm-0" href="/auth/login">Iniciar
-        Sesión</a>
-      <a
-        class="btn btn-outline-primary my-2 my-sm-0"
-        href="/auth/register"
-      >Registrarse</a>
-    {{/if}}
+    <ul class="navbar-nav ml-auto">
+      {{#if user}}
+        <li class="nav-item">
+          <span class="navbar-text mr-3">Hola, {{user.nombre}}</span>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-danger my-2 my-sm-0" href="/auth/logout">Cerrar sesión</a>
+        </li>
+      {{else}}
+        <li class="nav-item">
+          <a class="btn btn-outline-success my-2 my-sm-0" href="/auth/login">Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-primary my-2 my-sm-0" href="/auth/register">Registrarse</a>
+        </li>
+      {{/if}}
+    </ul>
   </div>
 </nav>

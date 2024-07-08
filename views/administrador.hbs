@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/administrador.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Administración de Tickets</title>
 </head>
@@ -41,8 +41,8 @@
                         </form>
                     </td>
                     <td>
-                        <a href="/tickets/{{this.id}}/comments" class="btn btn-info btn-sm">Ver Comentarios</a>
-                        <a href="/tickets/{{this.id}}/comments/new" class="btn btn-success btn-sm">Crear Comentario</a>
+                        <a href="/tickets/{{this.id}}/comments" class="btn btn-info btn-sm" id="ver-comentarios">Ver Comentarios</a>
+                        <a href="/tickets/{{this.id}}/comments/new" class="btn btn-success btn-sm" id="crear-comentario">Crear Comentario</a>
                         <form 
                           action="/tickets/{{this.id}}/delete" 
                           method="POST" 
@@ -50,7 +50,7 @@
                           class="delete-ticket" 
                           data-id="{{this.id}}"
                         >
-                          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                          <button type="submit" class="btn btn-danger btn-sm" id="borrar-ticket">Eliminar</button>
                         </form>
                     </td>
                 </tr>
