@@ -1,17 +1,22 @@
-{{!-- ticket_details.hbs --}}
-{{> main title="Detalles del Ticket"}}
-<h1>Detalles del Ticket</h1>
-<h2>{{ticket.titulo}}</h2>
-<p>{{ticket.descripcion}}</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Detalle del Ticket</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Detalle del Ticket</h2>
+        <p><strong>ID:</strong> {{ticket.id}}</p>
+        <p><strong>Descripción:</strong> {{ticket.descripcion}}</p>
+        <p><strong>Fecha de Creación:</strong> {{ticket.fecha_creacion}}</p>
+        <p><strong>Auditado:</strong> {{#if ticket.auditado}}Sí{{else}}No{{/if}}</p>
+        <a href="/tickets/{{ticket.id}}/comments/new" class="btn btn-primary">Agregar Nuevo Comentario</a>
+        <a href="/tickets/{{ticket.id}}/comments" class="btn btn-info">Ver Comentarios</a>
+    </div>
+</body>
+</html>
 
-<h3>Comentarios</h3>
-<ul>
-  {{#each comments}}
-    <li>{{this.mensaje}}</li>
-  {{/each}}
-</ul>
-
-<form action="/tickets/{{ticket.id}}/comment" method="post">
-  <textarea name="mensaje" placeholder="Añadir comentario"></textarea>
-  <button type="submit">Enviar</button>
-</form>

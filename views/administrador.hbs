@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Administrador</title>
+    <title>Administración de Tickets</title>
 </head>
 <body>
-    {{> header}}
     <div class="container">
-        <h2>Todos los Tickets</h2>
+        <h2>Administración de Tickets</h2>
+        <a href="/tickets/new" class="btn btn-primary mb-3" style="display: none;">Crear Nuevo Ticket</a>
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Descripción</th>
                     <th>Fecha de Creación</th>
+                    <th>Auditado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -27,17 +28,26 @@
                     <td><a href="/tickets/{{this.id}}">{{this.descripcion}}</a></td>
                     <td>{{this.fecha_creacion}}</td>
                     <td>
-                        <a href="#" data-id="{{this.id}}" class="btn btn-danger delete-ticket">Eliminar</a>
+                        <form action="/tickets/{{this.id}}/auditado" method="POST">
+                            <input type="hidden" name="auditado" value="{{#if this.auditado}}false{{else}}true{{/if}}">
+                            <button type="submit" class="btn btn-warning btn-sm">
+                                {{#if this.auditado}}Desmarcar Auditado{{else}}Marcar Auditado{{/if}}
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/tickets/{{this.id}}" method="POST" class="delete-form">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger btn-sm delete-ticket" data-id="{{this.id}}">Eliminar</button>
+                        </form>
+                        <a href="/tickets/{{this.id}}/comments/new" class="btn btn-info btn-sm">Nuevo Comentario</a>
                     </td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
     </div>
-    {{> footer}}
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/scripts.js"></script>
+
+    <script src="/js/script.js"></script>
 </body>
 </html>

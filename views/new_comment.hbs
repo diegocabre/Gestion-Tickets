@@ -1,14 +1,30 @@
-<!-- new_comment.hbs -->
-<h2>Añadir Comentario</h2>
-<form action="/tickets/{{ticket.id}}/comment" method="POST">
-  <div class="form-group">
-    <label for="mensaje">Mensaje:</label>
-    <textarea
-      class="form-control"
-      id="mensaje"
-      name="mensaje"
-      required
-    ></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Añadir Comentario</button>
-</form>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Nuevo Comentario</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Nuevo Comentario para el Ticket {{ticketId}}</h2>
+      <form action="/tickets/{{ticketId}}/comment" method="POST">
+        <div class="form-group">
+          <label for="mensaje">Mensaje:</label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            class="form-control"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar Comentario</button>
+      </form>
+    </div>
+  </body>
+</html>
