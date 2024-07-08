@@ -100,7 +100,7 @@ router.post("/:id/auditado", checkRole("administrador"), async (req, res) => {
   const { auditado } = req.body; // auditado debe ser 'true' o 'false'
 
   try {
-    const auditadoBoolean = auditado === "true";
+    const auditadoBoolean = auditado === "false" ? false : true;
 
     await pool.query("UPDATE tickets SET auditado = $1 WHERE id = $2", [
       auditadoBoolean,
