@@ -45,7 +45,11 @@ git clone https://github.com/diegocabre/sistema-tickets.git
 # Paso 2: Navega al directorio del proyecto
 cd sistema-tickets
 
-# Paso 3: Instala las dependencias
+# Paso 3:
+
+cd server
+
+# Paso 4: Instala las dependencias
 npm install
 
 Credenciales de Acceso
