@@ -10,11 +10,11 @@
 <body>
     <div class="container">
         <h2>Administración de Tickets</h2>
-        <a href="/tickets/new" class="btn btn-primary mb-3" style="display: none;">Crear Nuevo Ticket</a>
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Estudiante</th>
                     <th>Descripción</th>
                     <th>Fecha de Creación</th>
                     <th>Auditado</th>
@@ -25,22 +25,33 @@
                 {{#each tickets}}
                 <tr>
                     <td>{{this.id}}</td>
+                    <td>{{this.estudiante_nombre}}</td> <!-- Cambiado aquí -->
                     <td><a href="/tickets/{{this.id}}">{{this.descripcion}}</a></td>
                     <td>{{this.fecha_creacion}}</td>
                     <td>
                         <form action="/tickets/{{this.id}}/auditado" method="POST">
-                            <input type="hidden" name="auditado" value="{{#if this.auditado}}false{{else}}true{{/if}}">
-                            <button type="submit" class="btn btn-warning btn-sm">
-                                {{#if this.auditado}}Desmarcar Auditado{{else}}Marcar Auditado{{/if}}
-                            </button>
+                            <input 
+                                type="checkbox" 
+                                name="auditado" 
+                                value="true" 
+                                {{#if this.auditado}}checked{{/if}} 
+                                onChange="this.form.submit()"
+                            >
+                            <input type="hidden" name="auditado" value="false">
                         </form>
                     </td>
                     <td>
-                        <form action="/tickets/{{this.id}}" method="POST" class="delete-form">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger btn-sm delete-ticket" data-id="{{this.id}}">Eliminar</button>
+                        <a href="/tickets/{{this.id}}/comments" class="btn btn-info btn-sm">Ver Comentarios</a>
+                        <a href="/tickets/{{this.id}}/comments/new" class="btn btn-success btn-sm">Crear Comentario</a>
+                        <form 
+                          action="/tickets/{{this.id}}/delete" 
+                          method="POST" 
+                          style="display: inline;" 
+                          class="delete-ticket" 
+                          data-id="{{this.id}}"
+                        >
+                          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                         </form>
-                        <a href="/tickets/{{this.id}}/comments/new" class="btn btn-info btn-sm">Nuevo Comentario</a>
                     </td>
                 </tr>
                 {{/each}}
@@ -48,6 +59,10 @@
         </table>
     </div>
 
-    <script src="/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/js/scripts.js"></script>
 </body>
 </html>
+
