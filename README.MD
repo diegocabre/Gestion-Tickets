@@ -40,16 +40,13 @@ Sigue los siguientes pasos para configurar el entorno de desarrollo e instalar t
 
 ```bash
 # Paso 1: Clona el repositorio
-git clone https://github.com/diegocabre/sistema-tickets.git
+git clone https://https://github.com/diegocabre/Gestion-Tickets
 
 # Paso 2: Navega al directorio del proyecto
-cd sistema-tickets
+cd Gestion-Tickets
 
-# Paso 3:
 
-cd server
-
-# Paso 4: Instala las dependencias
+# Paso 3: Instala las dependencias
 npm install
 
 Credenciales de Acceso
@@ -62,5 +59,6 @@ Contraseña: Abc123#
 Email: estudiante2@mail.com
 Contraseña: Abc123#
 Autor
+
 Diego Cabre
 ```
