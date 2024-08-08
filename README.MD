@@ -61,4 +61,58 @@ Contraseña: Abc123#
 Autor
 
 Diego Cabre
-```
+
+# Paso 4: crea BD
+
+-- Active: 1713565959560@@127.0.0.1@5433@gestion_tickets@public
+CREATE DATABASE gestion_tickets
+
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    tipo_usuario VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE tipos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+ALTER TABLE tickets ADD COLUMN id_tipo INT REFERENCES tipos(id);
+
+INSERT INTO tipos (nombre) VALUES ('Urgente'), ('Importante'), ('Neutro');
+
+CREATE TABLE tickets (
+    id SERIAL PRIMARY KEY,
+    descripcion TEXT NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_usuario INT NOT NULL REFERENCES usuarios(id),
+    id_tipo INT NOT NULL REFERENCES tipos(id)
+);
+
+ALTER TABLE tickets ADD COLUMN auditado BOOLEAN DEFAULT FALSE;
+
+
+CREATE TABLE comentarios (
+    id SERIAL PRIMARY KEY,
+    mensaje TEXT NOT NULL,
+    id_usuario INT NOT NULL REFERENCES usuarios(id),
+    id_ticket INT NOT NULL REFERENCES tickets(id)
+);
+
+SELECT * FROM usuarios;
+
+SELECT * FROM tipos
+
+SELECT id, nombre FROM tipos;
+
+CREATE TABLE notificaciones (
+    id SERIAL PRIMARY KEY,
+    id_usuario INTEGER REFERENCES usuarios(id),
+    mensaje TEXT,
+    leida BOOLEAN DEFAULT FALSE,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
