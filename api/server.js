@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const path = require("path");
-const addUserToLocals = require("./middlewares/addUserToLocals");
+const addUserToLocals = require("../middlewares/addUserToLocals");
 require("dotenv").config();
 
 // Configuración de la conexión a la base de datos
@@ -73,9 +73,9 @@ app.use(express.static(path.join(__dirname, "../client")));
 app.use(addUserToLocals);
 
 // Rutas
-const indexRoutes = require("./routes/index");
-const { router: authRoutes } = require("./routes/auth");
-const ticketRoutes = require("./routes/tickets");
+const indexRoutes = require("../routes/index");
+const { router: authRoutes } = require("../routes/auth");
+const ticketRoutes = require("../routes/tickets");
 
 app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
