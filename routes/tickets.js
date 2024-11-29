@@ -20,6 +20,7 @@ router.get("/inicio/estudiante", checkRole("estudiante"), (req, res) => {
 router.get("/new", checkRole("estudiante"), async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM tipos"); // Obtener tipos de tickets
+    console.log("Tipos obtenidos:", result.rows); // Agrega este log para depuración
     res.render("new_ticket", { tipos: result.rows });
   } catch (error) {
     console.error("Error al obtener tipos de tickets:", error);

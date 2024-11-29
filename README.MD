@@ -16,6 +16,20 @@ Este proyecto es un sistema de tickets para soporte técnico que permite a los u
 ![Nuevo Ticket](image-5.png)
 ![Comentarios](image-6.png)
 
+## Pasos para el Uso del Proyecto
+
+1. Registra un usuario Administrador y 1 usuario Estudiante.
+
+2. Inicia sesión con el usuario que creaste como estudiante.
+
+3. Crea un nuevo ticket.
+
+4. Visualiza el ticket creado desde la cuenta de administrados y colocalo auditado y comenta el ticket.
+
+5. Visualiza el ticket creado desde la cuenta de estudiantes y ve comentarios.
+
+Es un sistema que permite a los usuarios crear, visualizar y gestionar tickets de soporte. es básico pero funcional.
+
 ## Prerrequisitos o Dependencias
 
 ### Dependencias
@@ -49,70 +63,7 @@ cd Gestion-Tickets
 # Paso 3: Instala las dependencias
 npm install
 
-Credenciales de Acceso
-Para Usuario Tipo Administrador
-Email: administrador@mail.com
-Contraseña: Abc123#
-Para Usuario Tipo Estudiante
-Email: estudiante@mail.com
-Contraseña: Abc123#
-Email: estudiante2@mail.com
-Contraseña: Abc123#
 Autor
 
 Diego Cabre
-
-# Paso 4: crea BD
-
--- Active: 1713565959560@@127.0.0.1@5433@gestion_tickets@public
-CREATE DATABASE gestion_tickets
-
-CREATE TABLE usuarios (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    tipo_usuario VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE tipos (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL
-);
-
-ALTER TABLE tickets ADD COLUMN id_tipo INT REFERENCES tipos(id);
-
-INSERT INTO tipos (nombre) VALUES ('Urgente'), ('Importante'), ('Neutro');
-
-CREATE TABLE tickets (
-    id SERIAL PRIMARY KEY,
-    descripcion TEXT NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    id_usuario INT NOT NULL REFERENCES usuarios(id),
-    id_tipo INT NOT NULL REFERENCES tipos(id)
-);
-
-ALTER TABLE tickets ADD COLUMN auditado BOOLEAN DEFAULT FALSE;
-
-
-CREATE TABLE comentarios (
-    id SERIAL PRIMARY KEY,
-    mensaje TEXT NOT NULL,
-    id_usuario INT NOT NULL REFERENCES usuarios(id),
-    id_ticket INT NOT NULL REFERENCES tickets(id)
-);
-
-SELECT * FROM usuarios;
-
-SELECT * FROM tipos
-
-SELECT id, nombre FROM tipos;
-
-CREATE TABLE notificaciones (
-    id SERIAL PRIMARY KEY,
-    id_usuario INTEGER REFERENCES usuarios(id),
-    mensaje TEXT,
-    leida BOOLEAN DEFAULT FALSE,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+```
