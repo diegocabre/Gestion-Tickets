@@ -8,6 +8,8 @@ const path = require("path");
 const addUserToLocals = require("../middlewares/addUserToLocals");
 require("dotenv").config();
 
+const app = express();
+
 // Configuración de la conexión a la base de datos
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -16,16 +18,14 @@ const pool = new Pool({
   },
 });
 
-const app = express();
-
 // Configuración de Handlebars
 app.engine(
   ".hbs",
   engine({
     extname: ".hbs",
     defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "views/layouts"),
-    partialsDir: path.join(__dirname, "views/partials"),
+    layoutsDir: path.join(__dirname, "../views/layouts"), // Ajustado
+    partialsDir: path.join(__dirname, "../views/partials"), // Ajustado
     helpers: {
       ifCond: function (v1, operator, v2, options) {
         switch (operator) {
@@ -53,8 +53,10 @@ app.engine(
   })
 );
 app.set("view engine", ".hbs");
-app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "../views")); // Ajustado
+
+// Configuración de recursos estáticos
+app.use(express.static(path.join(__dirname, "../public"))); // Ajustado
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -67,7 +69,7 @@ app.use(
   })
 );
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "../client"))); // Ajustado
 
 // Middleware para agregar usuario a res.locals
 app.use(addUserToLocals);
@@ -81,8 +83,9 @@ app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
 app.use("/tickets", ticketRoutes);
 
+// Ruta principal
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home"); // Renderiza la vista home.hbs
 });
 
 // Iniciar el servidor
